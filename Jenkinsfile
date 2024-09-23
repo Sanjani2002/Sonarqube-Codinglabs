@@ -8,19 +8,13 @@ pipeline {
     }
     stages {
         stage('Checkout') {
-            steps {
-                script {
-                    // Use a specific Git tool
-                    def gitTool = tool name: 'Git', type: 'GitTool'
-                    checkout([$class: 'GitSCM', 
-                        branches: [[name: '*/main']],
-                        userRemoteConfigs: [[url: 'https://github.com/Sanjani2002/Sonarqube-Codinglabs.git', credentialsId: 'squ_f0762dacd4eb2370f6211abc287fb83845fe0a50']],
-                        extensions: [[$class: 'Timeout', timeout: 60]],
-                        gitTool: gitTool
-                    ])
-                }
-            }
+    steps {
+        script {
+            sh 'git clone https://github.com/Sanjani2002/Sonarqube-Codinglabs.git'
         }
+    }
+}
+
         stage('Build') {
             steps {
                 sh 'mvn clean package'
