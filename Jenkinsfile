@@ -7,10 +7,13 @@ pipeline {
         SONARQUBE_URL = 'http://sonarqube:9000'  // Adjust as needed
     }
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                // Checkout your Java source code from SCM (GitHub, GitLab, etc.)
-                git 'https://github.com/Sanjani2002/Sonarqube-Codinglabs.git'
+                checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/Sanjani2002/Sonarqube-Codinglabs.git', credentialsId: 'squ_f0762dacd4eb2370f6211abc287fb83845fe0a50']],
+                    extensions: [[$class: 'Timeout', timeout: 120]]  // Timeout in seconds
+                ])
             }
         }
         stage('Build') {
