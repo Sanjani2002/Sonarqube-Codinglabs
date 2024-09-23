@@ -8,12 +8,12 @@ pipeline {
     }
     stages {
         stage('Checkout') {
-    steps {
-        script {
-            sh 'git clone https://github.com/Sanjani2002/Sonarqube-Codinglabs.git'
+            steps {
+                script {
+                    sh 'git clone https://github.com/Sanjani2002/Sonarqube-Codinglabs.git'
+                }
+            }
         }
-    }
-}
 
         stage('Build') {
             steps {
